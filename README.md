@@ -6,7 +6,7 @@
 $ pip3 install wxpy matplotlib
 ```
 
-其中`matplotlib`默认不支持中文件，需要配置一下中文字体：
+其中`matplotlib`默认不支持中文，需要配置一下中文字体：
 
 ```
 cnFont = FontProperties(fname='/System/Library/Fonts/PingFang.ttc')
