@@ -6,7 +6,6 @@ import matplotlib.pyplot as plot
 from matplotlib.font_manager import FontManager, FontProperties
 import re
 import jieba
-import codecs
 from wordcloud import WordCloud
 
 cnFontPath = '/System/Library/Fonts/PingFang.ttc'
@@ -84,7 +83,7 @@ def provinceDist():
 def signatureWordCloud():
     signatureText ="".join(list(map(lambda f: re.compile('<[^>]+>').sub("",f.signature), bot.friends())))
     space_split_words = " ".join(jieba.cut(signatureText, cut_all=True))
-    gen_word_cloud = WordCloud(background_color='white', max_words = 2000, max_font_size=40,random_state=42,font_path=cnFontPath).generate(space_split_words)
+    gen_word_cloud = WordCloud(background_color='white', max_words = 2000, max_font_size=40, random_state=42, font_path=cnFontPath).generate(space_split_words)
 
     word_file = "wordcloud.png"
     gen_word_cloud.to_file(word_file)

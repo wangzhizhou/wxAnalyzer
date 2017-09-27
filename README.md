@@ -3,7 +3,7 @@
 使用`python3`，需要安装模块`wxpy`和`matplotlib`
 
 ```
-$ pip3 install wxpy matplotlib
+$ pip3 install wxpy matplotlib jieba wordcloud
 ```
 
 其中`matplotlib`默认不支持中文，需要配置一下中文字体：
