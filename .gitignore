@@ -5,7 +5,11 @@ __pycache__/
 *.pkl
 *.png
 *.jpg
+.idea/
 
+!sex.png
+!wordcloud.png
+!province.png
 # C extensions
 *.so
 

@@ -18,6 +18,15 @@ cnFont = FontProperties(fname='/System/Library/Fonts/PingFang.ttc')
 # 目前功能
 
 1. 分析朋友圈的男女比例，并发送图片到微信文件小助手
+
+![sexRatio](sex.png)
+
 2. 分析朋友圈城市分布，并发送条形图到微信文件小助手
+
+![province](province.png)
+
+3. 分析朋友圈个性签名，并生成词云图发送到微信小助手
+
+![wordcloud](wordcloud.png)
 
 

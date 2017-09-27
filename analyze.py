@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# pip3 install matplotlib wxpy
-
+# pip3 install matplotlib wxpy jieba wordcloud
 from wxpy import *
 import matplotlib.pyplot as plot
 from matplotlib.font_manager import FontManager, FontProperties
+import re
+import jieba
+import codecs
+from wordcloud import WordCloud
 
-cnFont = FontProperties(fname='/System/Library/Fonts/PingFang.ttc')
+cnFontPath = '/System/Library/Fonts/PingFang.ttc'
+cnFont = FontProperties(fname=cnFontPath)
 
 bot = Bot(console_qr=True, cache_path=True)
 
@@ -77,12 +81,24 @@ def provinceDist():
     plot.close('all')
     return provinceDistImg
 
+def signatureWordCloud():
+    signatureText ="".join(list(map(lambda f: re.compile('<[^>]+>').sub("",f.signature), bot.friends())))
+    space_split_words = " ".join(jieba.cut(signatureText, cut_all=True))
+    gen_word_cloud = WordCloud(background_color='white', max_words = 2000, max_font_size=40,random_state=42,font_path=cnFontPath).generate(space_split_words)
+
+    word_file = "wordcloud.png"
+    gen_word_cloud.to_file(word_file)
+    return word_file
 
 def analyze():
+
+    # 发送到群组
     # sendGroup(provinceDist(),'桃园酒侠')
 
     # 发给自己的文件小助手
+    bot.file_helper.send_image(sexRatio())
     bot.file_helper.send_image(provinceDist())
+    bot.file_helper.send_image(signatureWordCloud())
 
 if __name__ == '__main__':
     analyze()
