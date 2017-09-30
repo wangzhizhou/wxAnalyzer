@@ -13,6 +13,35 @@ cnFont = FontProperties(fname=cnFontPath)
 
 bot = Bot(console_qr=True, cache_path=True)
 
+xiaoi = XiaoI('t0T13ypOyooD', 'peJl3US6B7W0xRr6WxgR')
+
+jiuxiaGroup = ensure_one(bot.groups().search('桃园酒侠'))
+
+IS_BOT = False
+def setBot(isBot):
+    global IS_BOT
+    IS_BOT = isBot
+
+def getBot():
+    return IS_BOT
+
+@bot.register(jiuxiaGroup,except_self=False)
+def receiveGroupMessage(msg):
+    if msg.text == 'bot':
+        jiuxiaGroup.send('开启肥龙机器人模式')
+        setBot(True)
+
+    elif msg.text == 'endbot':
+        jiuxiaGroup.send('退出肥龙机器人模式')
+        setBot(False)
+
+    elif getBot():
+        xiaoi.do_reply(msg)
+
+    elif msg.text.find('@'+bot.self.name) >=0 and msg.text.find('help') >= 0:
+        jiuxiaGroup.send("'bot' - 开启肥龙机器人模式\n'endbot' - 退出肥龙机器人模式")
+
+
 def sendGroup(image, toGroup):
     groups = bot.groups().search(toGroup)
     if len(groups) > 0:
@@ -100,4 +129,5 @@ def analyze():
     bot.file_helper.send_image(signatureWordCloud())
 
 if __name__ == '__main__':
-    analyze()
+    # analyze()
+    embed()
