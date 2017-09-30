@@ -25,21 +25,37 @@ def setBot(isBot):
 def getBot():
     return IS_BOT
 
-@bot.register(jiuxiaGroup,except_self=False)
-def receiveGroupMessage(msg):
+@bot.register(except_self=False)
+def botHandler(msg):
     if msg.text == 'bot':
-        jiuxiaGroup.send('开启肥龙机器人模式')
+        msg.chat.send('开启%s机器人模式' % bot.self.name)
         setBot(True)
 
     elif msg.text == 'endbot':
-        jiuxiaGroup.send('退出肥龙机器人模式')
+        msg.chat.send('退出%s机器人模式' % bot.self.name)
         setBot(False)
 
     elif getBot():
         xiaoi.do_reply(msg)
 
     elif msg.text.find('@'+bot.self.name) >=0 and msg.text.find('help') >= 0:
-        jiuxiaGroup.send("'bot' - 开启肥龙机器人模式\n'endbot' - 退出肥龙机器人模式")
+        msg.chat.send("'bot' - 开启%s机器人模式\n'endbot' - 退出%s机器人模式" % (bot.self.name,bot.self.name))
+
+# @bot.register(jiuxiaGroup,except_self=False)
+# def receiveGroupMessage(msg):
+#     if msg.text == 'bot':
+#         jiuxiaGroup.send('开启肥龙机器人模式')
+#         setBot(True)
+#
+#     elif msg.text == 'endbot':
+#         jiuxiaGroup.send('退出肥龙机器人模式')
+#         setBot(False)
+#
+#     elif getBot():
+#         xiaoi.do_reply(msg)
+#
+#     elif msg.text.find('@'+bot.self.name) >=0 and msg.text.find('help') >= 0:
+#         jiuxiaGroup.send("'bot' - 开启肥龙机器人模式\n'endbot' - 退出肥龙机器人模式")
 
 
 def sendGroup(image, toGroup):
