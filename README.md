@@ -29,4 +29,6 @@ cnFont = FontProperties(fname='/System/Library/Fonts/PingFang.ttc')
 
 ![wordcloud](wordcloud.png)
 
+4. 添加了聊天机器人功能
+
 
